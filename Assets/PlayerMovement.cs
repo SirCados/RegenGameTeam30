@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //physics calculations
         Move();
-        SetOrientation();
+        //SetOrientation();
     }
 
     private void OnEnable()
@@ -93,8 +93,8 @@ public class PlayerMovement : MonoBehaviour
                 direction = playerDirection.down;
             }
         }
-
-        switch (direction)
+        /*
+         *         switch (direction)
         {
             case playerDirection.right:
                 transform.localScale = new Vector2(1, 0);
@@ -109,5 +109,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.localScale = new Vector2(0, -1);
                 break;
         }
+         */
+
     }
 }
