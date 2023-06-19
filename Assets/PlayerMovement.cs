@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //physics calculations
         Move();
-        //SetOrientation();
+        SetOrientation();
     }
 
     private void OnEnable()
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     void SetOrientation()
     {
-        
+    
         //I need to get the players current orientation
         //when the player chooses a different direction, flip the sprite to face that directoin
         // change Input.getAXISRAW into a switchable variable
@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") > 0.5)
             {
                 direction = playerDirection.right;
+                Console.WriteLine(direction
+                    .ToString());
 
             } else if (Input.GetAxisRaw("Horizontal") < -0.5f)
             {
