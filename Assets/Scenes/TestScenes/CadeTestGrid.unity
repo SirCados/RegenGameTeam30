@@ -46942,7 +46942,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tileMap: {fileID: 1051851250}
-  _orangeTile: {fileID: 11400000, guid: 9f14adcdf96a8ea40a31a818c1e8f668, type: 2}
+  _badlandBase: {fileID: 11400000, guid: 63a230753ec825c4ebab3daeb2a2969f, type: 2}
+  _midlandBase: {fileID: 11400000, guid: 9f14adcdf96a8ea40a31a818c1e8f668, type: 2}
+  _goodlandBase: {fileID: 11400000, guid: 0b22f135f35d6cb469611ec8e56ba7af, type: 2}
   _camera: {fileID: 164947601}
 --- !u!4 &1920574006
 Transform:
