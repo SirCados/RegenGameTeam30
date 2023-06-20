@@ -42,7 +42,7 @@ public class TileChanger : MonoBehaviour
             if (_firstClick != _emptyCell && _secondClick != _emptyCell)
             {
                 print("Changing!");
-                ChangeTilesInSelection();
+                FindSelectionCorners();
             }
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -85,34 +85,22 @@ public class TileChanger : MonoBehaviour
         }
     }
 
-    void ChangeTilesInSelection()
+    void FindSelectionCorners()
     {
-        Vector3Int firstPoint = Vector3Int.FloorToInt(_firstClick);
-        Vector3Int secondPoint = Vector3Int.FloorToInt(_secondClick);
-        Vector3Int selectionSize;
+        Vector3Int startPoint = _firstClick;
+        Vector3Int endPoint = _secondClick;
 
-        if(firstPoint.x != secondPoint.x && firstPoint.y != secondPoint.y)
-        {
-            int height = (int)Mathf.Abs(firstPoint.y - secondPoint.y) + 1;
-            int width = (int)Mathf.Abs(firstPoint.x - secondPoint.x) + 1;
+        int leftMostX = (_firstClick.x > _secondClick.x) ? _firstClick.x : _secondClick.x;
+        int topMostY = (_firstClick.y > _secondClick.y) ? _firstClick.y : _secondClick.y;
 
-            selectionSize = new Vector3Int(width, height);
+        print("Start point: (" + leftMostX + ", " + topMostY + ")");
 
-            BoundsInt selectionArea = new BoundsInt(firstPoint, selectionSize);
+        int rightMostX = (_firstClick.x < _secondClick.x) ? _firstClick.x : _secondClick.x;
+        int bottomMostY = (_firstClick.y < _secondClick.y) ? _firstClick.y : _secondClick.y;
 
-            Tile[] tileArray = new Tile[height*width];
+        print("End point: (" + rightMostX + ", " + bottomMostY + ")");
 
-            print("height: " + height + " width: " + width);
-            for (int index = 0; index < tileArray.Length; index++)
-            {
-                tileArray[index] = _orangeTile;
-
-                print(tileArray[index].transform.GetPosition());
-            }
-
-            _tileMap.SetTilesBlock(selectionArea, tileArray);
-            ResetStoredPositions();
-        }
+        Tile[] tileArray;
     }
 
     void ResetStoredPositions()
