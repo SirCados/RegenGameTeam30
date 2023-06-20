@@ -5,21 +5,34 @@ using UnityEngine.Tilemaps;
 
 public class TileChanger : MonoBehaviour
 {
-    [SerializeField] Tilemap _tileMap;
+    [SerializeField] Tilemap _worldMap;
+    [SerializeField] Tilemap _selectorMap;
     [SerializeField] TileBase _badlandBase;
     [SerializeField] TileBase _midlandBase;
     [SerializeField] TileBase _healthySoilBase;
+    [SerializeField] TileBase _selectorTile;
     [SerializeField] Camera _camera;
 
+    bool _isSelecting = false;
     Vector3Int _firstClick;
     Vector3Int _secondClick;
+    Vector3Int _currentMousePosition;
+
+    TileBase _firstSelectedTile;
+
     //since (0,0,0) is in the playspace, I set a max int point to be the "empty space".
     //this shouldn't come up, but it is in for error handling/edge cases
     Vector3Int _emptyCell = new Vector3Int(999999999, 999999999, 999999999);
 
+    private void Awake()
+    {
+        _isSelecting = false;
+        _firstSelectedTile = _selectorTile;
+    }
+
     private void Start()
     {
-        ResetStoredPositions();
+        ResetSelector();        
     }
 
     // Update is called once per frame
@@ -35,26 +48,49 @@ public class TileChanger : MonoBehaviour
             if (_firstClick == _emptyCell)
             {
                 _firstClick = CaptureMousePosition();
+                SetFirstSelectedTile();
+                _isSelecting = true;
                 print(_firstClick);
             }
             else if (_firstClick != _emptyCell && _secondClick == _emptyCell)
             {
                 _secondClick = CaptureMousePosition();
+                _isSelecting = false;
                 print(_secondClick);
             }
-
+            
             if (_firstClick != _emptyCell && _secondClick != _emptyCell)
             {
-                FindSelectionCorners();
-                ResetStoredPositions();
+                FindSelectionCorners(_firstClick, _secondClick);
+                ResetSelector();
             }
+        }
+
+        if (_isSelecting)
+        {
+            print("selecting!");
+            FindSelectionCorners(_firstClick, CaptureMousePosition()); ;
         }
     }
 
-    void ResetStoredPositions()
+    void ResetSelector()
     {
         _firstClick = _emptyCell;
         _secondClick = _emptyCell;
+        _selectorMap.ClearAllTiles();
+    }
+
+    void GetCurrentMousePosition()
+    {
+        if (_isSelecting)
+        {
+            Vector3Int mouseIsAt = CaptureMousePosition();
+            if(mouseIsAt != _currentMousePosition)
+            {
+                _selectorMap.ClearAllTiles();
+                _currentMousePosition = CaptureMousePosition();
+            }
+        }
     }
 
     Vector3Int CaptureMousePosition()
@@ -67,9 +103,9 @@ public class TileChanger : MonoBehaviour
         }
 
         var worldPosition = _camera.ScreenToWorldPoint(screenPosition);
-        var gridPosition = _tileMap.WorldToCell(worldPosition);
+        var gridPosition = _worldMap.WorldToCell(worldPosition);
 
-        var tile = _tileMap.GetTile(gridPosition);
+        var tile = _worldMap.GetTile(gridPosition);
         if (tile != null)
         {
             return gridPosition;
@@ -81,14 +117,19 @@ public class TileChanger : MonoBehaviour
         }
     }
 
-    void FindSelectionCorners()
+    void SetFirstSelectedTile()
     {
-        int leftMostX = (_firstClick.x > _secondClick.x) ? _firstClick.x : _secondClick.x;
-        int topMostY = (_firstClick.y > _secondClick.y) ? _firstClick.y : _secondClick.y;
+        _firstSelectedTile = _worldMap.GetTile(_firstClick);
+    }
+
+    void FindSelectionCorners(Vector3Int firstPoint, Vector3Int secondPoint)
+    {
+        int leftMostX = (firstPoint.x > secondPoint.x) ? firstPoint.x : secondPoint.x;
+        int topMostY = (firstPoint.y > secondPoint.y) ? firstPoint.y : secondPoint.y;
         Vector3Int startPoint = new Vector3Int(leftMostX, topMostY, 0);
 
-        int rightMostX = (_firstClick.x < _secondClick.x) ? _firstClick.x : _secondClick.x;
-        int bottomMostY = (_firstClick.y < _secondClick.y) ? _firstClick.y : _secondClick.y;        
+        int rightMostX = (firstPoint.x < secondPoint.x) ? firstPoint.x : secondPoint.x;
+        int bottomMostY = (firstPoint.y < secondPoint.y) ? firstPoint.y : secondPoint.y;        
         Vector3Int endPoint = new Vector3Int(rightMostX, bottomMostY, 0);
 
         int height = Mathf.Abs(topMostY - bottomMostY) + 1;
@@ -112,23 +153,37 @@ public class TileChanger : MonoBehaviour
             }
         }
     }
+
     void DetermineNewTile(Vector3Int positionOfTheChange)
     {
-        TileBase tileAtPosition = _tileMap.GetTile(positionOfTheChange);
+        Tilemap targetMap = _selectorMap;
 
-        if (tileAtPosition.name == _badlandBase.name)
+        if (!_isSelecting)
         {
-            ChangeTile(positionOfTheChange, _midlandBase);
+            targetMap = _worldMap;
         }
-        else if (tileAtPosition.name == _midlandBase.name)
+
+        TileBase tileAtPosition = targetMap.GetTile(positionOfTheChange);
+        TileBase tileToPlace = _selectorTile;
+
+        if(!_isSelecting && tileAtPosition.name == _firstSelectedTile.name)
         {
-            ChangeTile(positionOfTheChange, _healthySoilBase);
-        }
+            if (tileAtPosition == _badlandBase)
+            {
+                tileToPlace = _midlandBase;
+            }
+            else if (tileAtPosition == _midlandBase)
+            {
+                tileToPlace = _healthySoilBase;
+            }
+        }        
+
+        ChangeTile(targetMap, positionOfTheChange, tileToPlace);
     }
 
-    void ChangeTile(Vector3Int positionOfTheChange, TileBase tileToChangeTo)
+    void ChangeTile(Tilemap targetMap, Vector3Int positionOfTheChange, TileBase tileToChangeTo)
     {
-        _tileMap.SetTile(positionOfTheChange, tileToChangeTo);
+        targetMap.SetTile(positionOfTheChange, tileToChangeTo);
     }
 }
 
