@@ -176,9 +176,12 @@ public class TileChanger : MonoBehaviour
             {
                 tileToPlace = _healthySoilBase;
             }
-        }        
-
-        ChangeTile(targetMap, positionOfTheChange, tileToPlace);
+        }  
+        
+        if(_isSelecting || (!_isSelecting && tileAtPosition.name == _firstSelectedTile.name))
+        {
+            ChangeTile(targetMap, positionOfTheChange, tileToPlace);
+        }
     }
 
     void ChangeTile(Tilemap targetMap, Vector3Int positionOfTheChange, TileBase tileToChangeTo)
