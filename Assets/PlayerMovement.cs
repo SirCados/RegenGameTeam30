@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //processing inputs
         ProcessInputs();
+
+ 
     }
 
 
@@ -61,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidBody.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
+
+
 
     void SetOrientation()
     {
