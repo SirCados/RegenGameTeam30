@@ -69,7 +69,7 @@ public class TileChanger : MonoBehaviour
         if (_isSelecting)
         {
             print("selecting!");
-            FindSelectionCorners(_firstClick, CaptureMousePosition()); ;
+            FindSelectionCorners(_firstClick, GetCurrentMousePosition()); ;
         }
     }
 
@@ -80,7 +80,7 @@ public class TileChanger : MonoBehaviour
         _selectorMap.ClearAllTiles();
     }
 
-    void GetCurrentMousePosition()
+    Vector3Int GetCurrentMousePosition()
     {
         if (_isSelecting)
         {
@@ -88,9 +88,10 @@ public class TileChanger : MonoBehaviour
             if(mouseIsAt != _currentMousePosition)
             {
                 _selectorMap.ClearAllTiles();
-                _currentMousePosition = CaptureMousePosition();
+                _currentMousePosition = CaptureMousePosition();                
             }
         }
+        return _currentMousePosition;
     }
 
     Vector3Int CaptureMousePosition()
