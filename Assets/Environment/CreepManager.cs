@@ -13,6 +13,7 @@ public class CreepManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("GetTilesToBeCorrupted", 5, 10);
         GetTilesToBeCorrupted();
     }
 
@@ -81,6 +82,16 @@ public class CreepManager : MonoBehaviour
                 if (tileAtPosition != null && tileAtPosition != _badlandBase)
                 {
                     print("corrupt this: " + tileAtPosition.name);
+                    TileBase corruptedTile = _corruptionMap.GetTile(positionOfTheChange);
+                    if(corruptedTile != null && corruptedTile == _corruptionOverlay)
+                    {
+                        _corruptionMap.DeleteCells(positionOfTheChange, new Vector3Int(1, 1, 0));
+                        _worldMap.SetTile(positionOfTheChange, _badlandBase);
+                    }
+                    else
+                    {
+                        _corruptionMap.SetTile(positionOfTheChange, _corruptionOverlay);
+                    }
                 }
             }
         }
