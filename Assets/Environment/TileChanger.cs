@@ -111,6 +111,7 @@ public class TileChanger : MonoBehaviour
         var tile = _worldMap.GetTile(gridPosition);
         if (tile != null)
         {
+            print(gridPosition);
             return gridPosition;
         }
         else
