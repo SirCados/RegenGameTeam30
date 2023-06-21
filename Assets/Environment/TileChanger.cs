@@ -7,6 +7,7 @@ public class TileChanger : MonoBehaviour
 {
     [SerializeField] Tilemap _worldMap;
     [SerializeField] Tilemap _selectorMap;
+    [SerializeField] Tilemap _plantMap;
     [SerializeField] TileBase _badlandBase;
     [SerializeField] TileBase _midlandBase;
     [SerializeField] TileBase _healthySoilBase;
@@ -45,6 +46,7 @@ public class TileChanger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            //What is being planted? I need to know here before anything else
             if (_firstClick == _emptyCell)
             {
                 _firstClick = CaptureMousePosition();
@@ -78,6 +80,7 @@ public class TileChanger : MonoBehaviour
         _firstClick = _emptyCell;
         _secondClick = _emptyCell;
         _selectorMap.ClearAllTiles();
+        _isSelecting = false;
     }
 
     Vector3Int GetCurrentMousePosition()
@@ -181,7 +184,14 @@ public class TileChanger : MonoBehaviour
         
         if(_isSelecting || (!_isSelecting && tileAtPosition.name == _firstSelectedTile.name))
         {
-            ChangeTile(targetMap, positionOfTheChange, tileToPlace);
+            if(_firstSelectedTile.name != _healthySoilBase.name)
+            {
+                ChangeTile(targetMap, positionOfTheChange, tileToPlace);
+            } 
+            else
+            {
+                ResetSelector();
+            }
         }
     }
 
