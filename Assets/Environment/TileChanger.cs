@@ -11,6 +11,8 @@ public class TileChanger : MonoBehaviour
     [SerializeField] TileBase _badlandBase;
     [SerializeField] TileBase _midlandBase;
     [SerializeField] TileBase _healthySoilBase;
+    [SerializeField] TileBase _healthySoilRooty;
+    [SerializeField] TileBase _cropTile;
     [SerializeField] TileBase _selectorTile;
     [SerializeField] Camera _camera;
 
@@ -52,13 +54,11 @@ public class TileChanger : MonoBehaviour
                 _firstClick = CaptureMousePosition();
                 SetFirstSelectedTile();
                 _isSelecting = true;
-                print(_firstClick);
             }
             else if (_firstClick != _emptyCell && _secondClick == _emptyCell)
             {
                 _secondClick = CaptureMousePosition();
                 _isSelecting = false;
-                print(_secondClick);
             }
             
             if (_firstClick != _emptyCell && _secondClick != _emptyCell)
@@ -70,7 +70,6 @@ public class TileChanger : MonoBehaviour
 
         if (_isSelecting)
         {
-            print("selecting!");
             FindSelectionCorners(_firstClick, GetCurrentMousePosition()); ;
         }
     }
@@ -151,8 +150,6 @@ public class TileChanger : MonoBehaviour
             for (int column = 0; column < width; column++)
             {
                 positionOfTheChange = new Vector3Int(startPoint.x - column, startPoint.y - row, 0);
-                
-                print("Tile to Change: " + positionOfTheChange);
                 DetermineNewTile(positionOfTheChange);
             }
         }
@@ -161,6 +158,7 @@ public class TileChanger : MonoBehaviour
     void DetermineNewTile(Vector3Int positionOfTheChange)
     {
         Tilemap targetMap = _selectorMap;
+        bool isTileGettingPlant = false;
 
         if (!_isSelecting)
         {
@@ -170,7 +168,7 @@ public class TileChanger : MonoBehaviour
         TileBase tileAtPosition = targetMap.GetTile(positionOfTheChange);
         TileBase tileToPlace = _selectorTile;
 
-        if(!_isSelecting && tileAtPosition.name == _firstSelectedTile.name)
+        if(!_isSelecting && tileAtPosition == _firstSelectedTile)
         {
             if (tileAtPosition == _badlandBase)
             {
@@ -180,13 +178,22 @@ public class TileChanger : MonoBehaviour
             {
                 tileToPlace = _healthySoilBase;
             }
+            else if(tileAtPosition == _healthySoilBase)
+            {
+                tileToPlace = _healthySoilRooty;
+                isTileGettingPlant = true;
+            }
         }  
         
-        if(_isSelecting || (!_isSelecting && tileAtPosition.name == _firstSelectedTile.name))
+        if(_isSelecting || (!_isSelecting && tileAtPosition == _firstSelectedTile))
         {
-            if(_firstSelectedTile.name != _healthySoilBase.name)
-            {
+            if(_firstSelectedTile != _healthySoilRooty)
+            {                
                 ChangeTile(targetMap, positionOfTheChange, tileToPlace);
+                if (isTileGettingPlant)
+                {
+                    ChangeTile(_plantMap, positionOfTheChange, _cropTile);
+                }
             } 
             else
             {
@@ -198,6 +205,11 @@ public class TileChanger : MonoBehaviour
     void ChangeTile(Tilemap targetMap, Vector3Int positionOfTheChange, TileBase tileToChangeTo)
     {
         targetMap.SetTile(positionOfTheChange, tileToChangeTo);
+    }
+
+    void AddCropToTile(Vector3Int positionOfTheChange, TileBase plantToAdd)
+    {
+
     }
 }
 
