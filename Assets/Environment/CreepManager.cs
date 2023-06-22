@@ -9,12 +9,18 @@ public class CreepManager : MonoBehaviour
     [SerializeField] Tilemap _corruptionMap;
     [SerializeField] TileBase _badlandBase;
     [SerializeField] TileBase _corruptionOverlay;
+    [SerializeField] float _creepTimer = 0;
+
+    bool _isSpreadConverting = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("GetTilesToBeCorrupted", 5, 10);
-        GetTilesToBeCorrupted();
+        if(_creepTimer < 1f)
+        {
+            _creepTimer = 5f;
+        }
+        InvokeRepeating("GetTilesToBeCorrupted", 1f, _creepTimer);        
     }
 
     // Update is called once per frame
@@ -39,16 +45,7 @@ public class CreepManager : MonoBehaviour
         Vector3Int maximumBounds = new Vector3Int(localMaxiumuX, localMaximumY, 0);
 
         FindSelectionCorners(minimumBounds, maximumBounds);
-    }
-
-    void GetNeighborsOfTile()
-    {
-
-    }
-
-    void CorruptTile()
-    {
-        //check if tile already has corruption or if it exists in array more than once
+        _isSpreadConverting = !_isSpreadConverting;
     }
 
     void FindSelectionCorners(Vector3Int firstPoint, Vector3Int secondPoint)
@@ -78,23 +75,45 @@ public class CreepManager : MonoBehaviour
                 positionOfTheChange = new Vector3Int(startPoint.x - column, startPoint.y - row, 0);
 
                 TileBase tileAtPosition = _worldMap.GetTile(positionOfTheChange);
-
-                if (tileAtPosition != null && tileAtPosition != _badlandBase)
+                if (tileAtPosition != null && tileAtPosition == _badlandBase)
                 {
-                    print("corrupt this: " + tileAtPosition.name);
-                    TileBase corruptedTile = _corruptionMap.GetTile(positionOfTheChange);
-                    if(corruptedTile != null && corruptedTile == _corruptionOverlay)
-                    {
-                        _corruptionMap.DeleteCells(positionOfTheChange, new Vector3Int(1, 1, 0));
-                        _worldMap.SetTile(positionOfTheChange, _badlandBase);
-                    }
-                    else
-                    {
-                        _corruptionMap.SetTile(positionOfTheChange, _corruptionOverlay);
-                    }
+                    GetNeighborsOfTile(positionOfTheChange);
                 }
             }
         }
     }
+    void GetNeighborsOfTile(Vector3Int positionOfTheChange)
+    {
+        Vector3Int[] tileAndNeighbors = new Vector3Int[4];
 
+        tileAndNeighbors[0] = new Vector3Int(positionOfTheChange.x - 1, positionOfTheChange.y, 0);
+        tileAndNeighbors[1] = new Vector3Int(positionOfTheChange.x, positionOfTheChange.y -1, 0);
+        tileAndNeighbors[2] = new Vector3Int(positionOfTheChange.x + 1, positionOfTheChange.y, 0);
+        tileAndNeighbors[3] = new Vector3Int(positionOfTheChange.x, positionOfTheChange.y + 1, 0);
+
+        foreach(Vector3Int tile in tileAndNeighbors)
+        {
+            CorruptTile(tile);
+        }
+    }
+
+    void CorruptTile(Vector3Int positionOfTheChange)
+    {
+        TileBase tileAtPosition = _worldMap.GetTile(positionOfTheChange);
+        if (tileAtPosition != null && tileAtPosition != _badlandBase)
+        {
+            print("corrupt this: " + tileAtPosition.name);
+            TileBase corruptedTile = _corruptionMap.GetTile(positionOfTheChange);
+            if (_isSpreadConverting && corruptedTile != null && corruptedTile == _corruptionOverlay && tileAtPosition != _badlandBase)
+            {
+                _corruptionMap.SetTile(positionOfTheChange, null);
+                _worldMap.SetTile(positionOfTheChange, _badlandBase);
+            }
+            else if(!_isSpreadConverting)
+            {
+                _corruptionMap.SetTile(positionOfTheChange, _corruptionOverlay);
+            }
+        }
+        //check if tile already has corruption or if it exists in array more than once
+    }
 }
