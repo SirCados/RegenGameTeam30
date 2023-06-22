@@ -7,6 +7,8 @@ public class CreepManager : MonoBehaviour
 {
     [SerializeField] Tilemap _worldMap;
     [SerializeField] Tilemap _corruptionMap;
+    [SerializeField] Tilemap _plantMap;
+    [SerializeField] TileBase[] _guardianPlants;
     [SerializeField] TileBase _badlandBase;
     [SerializeField] TileBase _corruptionOverlay;
     [SerializeField] float _creepTimer = 0;
@@ -91,19 +93,38 @@ public class CreepManager : MonoBehaviour
 
     void CorruptTile(Vector3Int positionOfTheChange)
     {
+
         TileBase tileAtPosition = _worldMap.GetTile(positionOfTheChange);
         if (tileAtPosition != null && tileAtPosition != _badlandBase)
         {
-            TileBase corruptedTile = _corruptionMap.GetTile(positionOfTheChange);
-            if (_isSpreadConverting && corruptedTile != null && corruptedTile == _corruptionOverlay && tileAtPosition != _badlandBase)
+            TileBase plantTile = _plantMap.GetTile(positionOfTheChange);
+
+            if (!CheckForGuardianPlants(plantTile))
             {
-                _corruptionMap.SetTile(positionOfTheChange, null);
-                _worldMap.SetTile(positionOfTheChange, _badlandBase);
-            }
-            else if(!_isSpreadConverting)
-            {
-                _corruptionMap.SetTile(positionOfTheChange, _corruptionOverlay);
+                TileBase corruptedTile = _corruptionMap.GetTile(positionOfTheChange);
+                if (_isSpreadConverting && corruptedTile != null && corruptedTile == _corruptionOverlay && tileAtPosition != _badlandBase)
+                {
+                    _corruptionMap.SetTile(positionOfTheChange, null);
+                    _worldMap.SetTile(positionOfTheChange, _badlandBase);
+                }
+                else if (!_isSpreadConverting)
+                {
+                    _corruptionMap.SetTile(positionOfTheChange, _corruptionOverlay);
+                }
             }
         }
+    }
+
+    bool CheckForGuardianPlants(TileBase plantTile)
+    {
+        foreach(TileBase guardianPlant in _guardianPlants)
+        {
+            if(plantTile == guardianPlant)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
