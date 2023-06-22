@@ -15,8 +15,6 @@ public GameObject projectile;
 public Transform shotPoint;
 public GameObject child;
 public Transform target;
-public float quaternionX;
-public float quaternionY;
 
     // Start is called before the first frame update
     void Start()
