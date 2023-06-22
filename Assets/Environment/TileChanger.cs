@@ -8,6 +8,7 @@ public class TileChanger : MonoBehaviour
     [SerializeField] Tilemap _worldMap;
     [SerializeField] Tilemap _selectorMap;
     [SerializeField] Tilemap _plantMap;
+    [SerializeField] Tilemap _corruptionMap;
     [SerializeField] TileBase _badlandBase;
     [SerializeField] TileBase _midlandBase;
     [SerializeField] TileBase _healthySoilBase;
