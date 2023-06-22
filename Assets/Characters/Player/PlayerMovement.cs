@@ -20,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public InputAction playerMovement;
     Vector2 moveDirection = Vector2.zero;
     playerDirection direction;
-    float dirX = Input.GetAxisRaw("Horizontal");
-    float dirY = Input.GetAxisRaw("Vertical");
+    float dirX;
+    float dirY;
     private Animator animator;
     // Start is called before the first frame update
 
@@ -35,7 +35,8 @@ public class PlayerMovement : MonoBehaviour
     void Start() 
     {
         animator = GetComponent<Animator>();
-
+        dirX = Input.GetAxisRaw("Horizontal");
+        dirY = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
