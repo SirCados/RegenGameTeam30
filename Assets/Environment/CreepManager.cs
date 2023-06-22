@@ -73,6 +73,7 @@ public class CreepManager : MonoBehaviour
             }
         }
     }
+
     void GetNeighborsOfTile(Vector3Int positionOfTheChange)
     {
         Vector3Int[] tileAndNeighbors = new Vector3Int[4];
