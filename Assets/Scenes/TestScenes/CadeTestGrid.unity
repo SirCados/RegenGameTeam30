@@ -136,6 +136,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 164947601}
     - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
+      propertyPath: _cropTile
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ed35666e7115284a9ef47c805e0bf89, type: 2}
+    - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
       propertyPath: _plantMap
       value: 
       objectReference: {fileID: 1933325161}
@@ -147,6 +151,10 @@ PrefabInstance:
       propertyPath: _selectorMap
       value: 
       objectReference: {fileID: 1388441872}
+    - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
+      propertyPath: _selectorTile
+      value: 
+      objectReference: {fileID: 11400000, guid: af3bae7256e67a148b3f0b3d41450925, type: 2}
     - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
       propertyPath: _corruptionMap
       value: 
