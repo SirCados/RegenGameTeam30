@@ -23,19 +23,10 @@ public class CreepManager : MonoBehaviour
         InvokeRepeating("GetTilesToBeCorrupted", 1f, _creepTimer);        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void GetTilesToBeCorrupted()
     {
         _worldMap.CompressBounds();
         
-        print("minbounds: " + _worldMap.localBounds.min);
-        print("maxbounds: " + _worldMap.localBounds.max);
-
         int localMinimumX = (int)_worldMap.localBounds.min.x;
         int localMinimumY = (int)_worldMap.localBounds.min.y;
         int localMaxiumuX = (int)_worldMap.localBounds.max.x;
@@ -102,7 +93,6 @@ public class CreepManager : MonoBehaviour
         TileBase tileAtPosition = _worldMap.GetTile(positionOfTheChange);
         if (tileAtPosition != null && tileAtPosition != _badlandBase)
         {
-            print("corrupt this: " + tileAtPosition.name);
             TileBase corruptedTile = _corruptionMap.GetTile(positionOfTheChange);
             if (_isSpreadConverting && corruptedTile != null && corruptedTile == _corruptionOverlay && tileAtPosition != _badlandBase)
             {
@@ -114,6 +104,5 @@ public class CreepManager : MonoBehaviour
                 _corruptionMap.SetTile(positionOfTheChange, _corruptionOverlay);
             }
         }
-        //check if tile already has corruption or if it exists in array more than once
     }
 }
