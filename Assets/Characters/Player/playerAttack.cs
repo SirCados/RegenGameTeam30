@@ -16,20 +16,39 @@ public Transform shotPoint;
 public GameObject child;
 public Transform target;
 
+    [SerializeField] GameObject _friendlyProjectile;
+    [SerializeField] Camera _camera;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        SpawnProjectile();
+    }
+
+    void FixedUpdate() 
+    {
+        //ProjectileAttack();
         
     }
 
-    void FixedUpdate() {
-        ProjectileAttack();
+    void SpawnProjectile()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            print("Spawn");
+            Vector3 screenPosition = Input.mousePosition;
+            Vector3 worldPosition = _camera.ScreenToWorldPoint(screenPosition);
+
+            //var worldPosition = _camera.ScreenToWorldPoint(screenPosition);
+            GameObject projectile = Instantiate(_friendlyProjectile, transform);
+            FriendlyProjectile projectileScript = projectile.GetComponent<FriendlyProjectile>();
+            projectileScript.MoveProjectile(worldPosition);
+        }
     }
 
     public void ProjectileAttack() {
@@ -52,6 +71,6 @@ public Transform target;
     fireballInst.velocity = worldPosition;
 
         }
-    }
-    
+    } 
+
 }
