@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - SpawnMonster
+  - Enemy
   layers:
   - Default
   - TransparentFX

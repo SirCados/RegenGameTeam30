@@ -19,9 +19,12 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void takeDamage(int amount) {
+
         health -= amount;
 
-        if (health <= 0) {
+        print("ouch");
+
+        if (health < 1) {
             Destroy(gameObject);
         }
     }

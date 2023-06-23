@@ -9,12 +9,13 @@ public class AI_RandomSpawner : MonoBehaviour
     [SerializeField] GameObject _monsterPrefab;
     //container for the different possible spawn points
     [SerializeField] GameObject[] _spawnPointArray;
+    [SerializeField] float _spawnTimer; 
 
     // Start is called before the first frame update
     void Start()
     {
         //Calls the SpawnMonster() method x seconds after starting and every y seconds after that.
-        InvokeRepeating("SpawnMonster", 1f, 2f);
+        InvokeRepeating("SpawnMonster", 1f, _spawnTimer);
 
     }
 
