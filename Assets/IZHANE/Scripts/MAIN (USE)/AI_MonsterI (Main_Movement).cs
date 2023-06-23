@@ -17,7 +17,7 @@ public class Monster_AI : MonoBehaviour
 
     void Start()
     {
-        
+        player = GameObject.Find("Player_prefab");
     }
 
     // Update is called once per frame
