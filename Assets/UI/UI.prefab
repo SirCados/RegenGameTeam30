@@ -4080,8 +4080,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.5587, y: -0.2708}
-  m_SizeDelta: {x: 1.209, y: 4.8764}
+  m_AnchoredPosition: {x: 5.6599, y: -0.2708}
+  m_SizeDelta: {x: 1.4114, y: 4.8764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1662671686955433444
 CanvasRenderer:
@@ -4120,9 +4120,10 @@ MonoBehaviour:
     L Stick
 
 
-    Button1
+    L Shoulder
 
-    Button2
+    R
+    Shoulder
 
 
     Button3
