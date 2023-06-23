@@ -11,7 +11,7 @@ public class playerAttack : MonoBehaviour
     public float meleeDamage;
 
     public Rigidbody2D fireball;
-    public float fireballSpeed = 8f;
+    public float fireballSpeed;
 public GameObject projectile;
 public Transform shotPoint;
 public GameObject child;
@@ -20,7 +20,7 @@ public Transform target;
     // Start is called before the first frame update
     void Start()
     {
-        
+      
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public Transform target;
 
     public void ProjectileAttack() {
 
-        bool lmb = Input.GetMouseButton(0);
+        bool lmb = Input.GetMouseButtonDown(0);
         
         RaycastHit hit;
 
@@ -43,17 +43,19 @@ public Transform target;
 
         if (Physics.Raycast(ray, out hit)) {
             Debug.Log("Scored a hit");
+            //EnemyHealth.takeDamage(shotDamage);
         }
 
         
 
         if (lmb) {
             Debug.Log("SHOOTING with left mouse click");
-            float step = speed * Time.deltaTime;
+            float step = fireballSpeed * 2 * Time.deltaTime;
             var fireballInst = Instantiate(fireball, transform.position, Quaternion.Euler(new Vector2(0, 0)));
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             fireballInst.velocity = worldPosition;
-            //EnemyHealth.takeDamage(shotDamage);
+            
+            Destroy(fireballInst, 5F);
         }
     }
 
@@ -65,5 +67,4 @@ public Transform target;
             //EnemyHealth.takeDamage(meleeDamage);
         }
     }
-    
 }
