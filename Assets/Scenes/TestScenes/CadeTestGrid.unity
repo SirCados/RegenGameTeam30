@@ -140,6 +140,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6ed35666e7115284a9ef47c805e0bf89, type: 2}
     - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
+      propertyPath: _feedCrop
+      value: 
+      objectReference: {fileID: 11400000, guid: 90f6dd7586c3dd14ebdae8ff346d2306, type: 2}
+    - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
+      propertyPath: _hedgerow
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b86fe54a5c52cd48962b9f6b40412f5, type: 2}
+    - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
       propertyPath: _plantMap
       value: 
       objectReference: {fileID: 1933325161}
@@ -148,9 +156,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1051851250}
     - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
+      propertyPath: _coverCrop
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ed35666e7115284a9ef47c805e0bf89, type: 2}
+    - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
       propertyPath: _selectorMap
       value: 
       objectReference: {fileID: 1388441872}
+    - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
+      propertyPath: _monsterPlant
+      value: 
+      objectReference: {fileID: 11400000, guid: dd3653ba0eff34c4688ac0536ac8e3a2, type: 2}
     - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
       propertyPath: _selectorTile
       value: 
@@ -159,6 +175,14 @@ PrefabInstance:
       propertyPath: _corruptionMap
       value: 
       objectReference: {fileID: 1877123979}
+    - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
+      propertyPath: _badlandInfested1
+      value: 
+      objectReference: {fileID: 11400000, guid: 17579dce39a7f554796bbb09d7864ac0, type: 2}
+    - target: {fileID: 1988816413050116193, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
+      propertyPath: _badlandInfested2
+      value: 
+      objectReference: {fileID: 11400000, guid: b4fcbe9ad73b17441a1112988e7464eb, type: 2}
     - target: {fileID: 8156774530532915962, guid: 95b43a4a1f9251d4385f3dbe098dcf1a, type: 3}
       propertyPath: m_RootOrder
       value: 3
