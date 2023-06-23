@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2229851609762403849}
   - component: {fileID: 4563441949914851384}
   - component: {fileID: 2713896439425195389}
-  - component: {fileID: 4131003489166213708}
+  - component: {fileID: 6219120264043140968}
   - component: {fileID: 6509342830333426798}
   - component: {fileID: 5557735350038145096}
   - component: {fileID: 6120908249915820866}
@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4563441949914851384
 SpriteRenderer:
@@ -104,7 +104,7 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 3
   distanceBetween: 4
---- !u!114 &4131003489166213708
+--- !u!114 &6219120264043140968
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,10 +113,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7242806769506527087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127acaf64777c4e4098c9a6f2a9ca343, type: 3}
+  m_Script: {fileID: 11500000, guid: 34051ef26eeabf545b7b87f808431797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Respawn: 0
+  _animator: {fileID: 0}
+  playerHealth: {fileID: 0}
+  damage: 2
 --- !u!114 &6509342830333426798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +162,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
