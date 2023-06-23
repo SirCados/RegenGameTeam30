@@ -501,13 +501,11 @@ PrefabInstance:
       propertyPath: projectile
       value: 
       objectReference: {fileID: 13567633}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7360494340329523335, guid: 1a6dfa5b8fec6e5419bde137504c4a8e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7964841790531018592, guid: 1a6dfa5b8fec6e5419bde137504c4a8e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8528150400166422492}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a6dfa5b8fec6e5419bde137504c4a8e, type: 3}
 --- !u!1001 &5740630420264966985
 PrefabInstance:
@@ -570,35 +568,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cedf61f45b63df84e99360173d39a4ef, type: 3}
---- !u!1 &6277925891185263948 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7964841790531018592, guid: 1a6dfa5b8fec6e5419bde137504c4a8e, type: 3}
-  m_PrefabInstance: {fileID: 4687929871710481933}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6507489095158970481 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2657735654448394756, guid: 1a6dfa5b8fec6e5419bde137504c4a8e, type: 3}
   m_PrefabInstance: {fileID: 4687929871710481933}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6277925891185263948}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 370d14fff45fd884aae0ee2047bd0a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8528150400166422492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6277925891185263948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 071548703abbde04e89ecfc60a2e0a30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerPos: {x: 0, y: 0}
-  target: {fileID: 0}
-  dirNearPlayer: {x: 0, y: 0, z: 0}
