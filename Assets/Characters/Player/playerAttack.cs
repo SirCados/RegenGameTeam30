@@ -49,8 +49,9 @@ public Transform target;
             float step = speed * Time.deltaTime;
         // transform.position = Vector2.MoveTowards(transform.position,target.position ,step);
          var fireballInst = Instantiate(fireball, transform.position, Quaternion.Euler(new Vector2(0, 0)));
-         
-    fireballInst.velocity = new Vector2(fireballSpeed, 0);
+    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    fireballInst.velocity = worldPosition;
+  // fireballInst.MovePosition(worldPosition);
 
         } else if (fButton) {
             Debug.Log("Shooting with f ");
