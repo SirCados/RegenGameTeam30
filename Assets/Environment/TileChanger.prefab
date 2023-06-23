@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8330875913697141323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8156774530532915962}
+  - component: {fileID: 1988816413050116193}
+  m_Layer: 0
+  m_Name: TileChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8156774530532915962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330875913697141323}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.3809073, y: -2.2928147, z: -6.9590864}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1988816413050116193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330875913697141323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a95becfcbd0eb24992962e0702b0621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _worldMap: {fileID: 0}
+  _selectorMap: {fileID: 0}
+  _plantMap: {fileID: 0}
+  _badlandBase: {fileID: 11400000, guid: 63a230753ec825c4ebab3daeb2a2969f, type: 2}
+  _midlandBase: {fileID: 11400000, guid: 9f14adcdf96a8ea40a31a818c1e8f668, type: 2}
+  _healthySoilBase: {fileID: 11400000, guid: 0b22f135f35d6cb469611ec8e56ba7af, type: 2}
+  _healthySoilRooty: {fileID: 11400000, guid: 0aa44b5ac43fc084d8d5246bc91fb573, type: 2}
+  _cropTile: {fileID: 11400000, guid: 4970445f64297bd4a98b2b23762370f3, type: 2}
+  _selectorTile: {fileID: 11400000, guid: 4970445f64297bd4a98b2b23762370f3, type: 2}
+  _camera: {fileID: 0}
