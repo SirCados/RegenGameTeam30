@@ -20,8 +20,9 @@ public class PlayerMovement : MonoBehaviour
     public InputAction playerMovement;
     Vector2 moveDirection = Vector2.zero;
     playerDirection direction;
-
-
+    float dirX;
+    float dirY;
+    private Animator animator;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -31,12 +32,18 @@ public class PlayerMovement : MonoBehaviour
         ProcessInputs();
     }
 
+    void Start() 
+    {
+        animator = GetComponent<Animator>();
+        dirX = Input.GetAxisRaw("Horizontal");
+        dirY = Input.GetAxisRaw("Vertical");
+    }
 
     void FixedUpdate()
     {
         //physics calculations
         Move();
-        SetOrientation();
+        GenerateAnimations();
     }
 
     private void OnEnable()
@@ -62,16 +69,18 @@ public class PlayerMovement : MonoBehaviour
         rigidBody.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
 
-    void SetOrientation()
+
+
+    void GenerateAnimations()
     {
     
         //I need to get the players current orientation
         //when the player chooses a different direction, flip the sprite to face that directoin
         // change Input.getAXISRAW into a switchable variable
 
-        if (Input.GetAxisRaw("Horizontal") > 0.5 || Input.GetAxisRaw("Horizontal") < -0.5f)
+        if (dirX > 0.5 || dirX < -0.5f)
         {
-            if (Input.GetAxisRaw("Horizontal") > 0.5)
+            if (dirX > 0.5)
             {
                 direction = playerDirection.right;
                 Console.WriteLine(direction
@@ -79,20 +88,25 @@ public class PlayerMovement : MonoBehaviour
 
             } else if (Input.GetAxisRaw("Horizontal") < -0.5f)
             {
+                
                 direction = playerDirection.left;
             }
                
         }
 
-        if (Input.GetAxisRaw("Vertical") > 0.5 || Input.GetAxisRaw("Vertical") < -0.5f)
+//set vertical animations for running up and down
+        if (dirY > 0.5 || dirY < -0.5f)
         {
-            if (Input.GetAxisRaw("Vertical") > 0.5)
+            if (dirY > 0.5)
             {
                 direction = playerDirection.up;
 
-            }else if (Input.GetAxisRaw("Vertical") < -0.5f)
+            }else if (dirY < -0.5f)
             {
+                animator.SetBool("isRunning", true);
                 direction = playerDirection.down;
+            } else {
+                animator.SetBool("isRunning", false);
             }
         }
         /*
