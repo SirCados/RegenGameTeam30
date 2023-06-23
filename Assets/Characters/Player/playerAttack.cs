@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class playerAttack : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public Transform target;
 
     [SerializeField] GameObject _friendlyProjectile;
     [SerializeField] Camera _camera;
+    [SerializeField] Tilemap _worldMap;
 
     // Start is called before the first frame update
     void Start()
@@ -42,12 +44,18 @@ public Transform target;
         {
             print("Spawn");
             Vector3 screenPosition = Input.mousePosition;
-            Vector3 worldPosition = _camera.ScreenToWorldPoint(screenPosition);
-
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+            Vector3Int gridPosition = _worldMap.WorldToCell(worldPosition);
+            Vector3 localPosition = transform.InverseTransformPoint(gridPosition);
             //var worldPosition = _camera.ScreenToWorldPoint(screenPosition);
+
             GameObject projectile = Instantiate(_friendlyProjectile, transform);
             FriendlyProjectile projectileScript = projectile.GetComponent<FriendlyProjectile>();
-            projectileScript.MoveProjectile(worldPosition);
+            Vector2 projectileVector = new Vector2(localPosition.x, localPosition.y).normalized;
+            print(localPosition);
+            print(projectileVector);
+            projectileScript.MoveProjectile(projectileVector);
+            
         }
     }
 
