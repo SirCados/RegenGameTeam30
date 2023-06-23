@@ -53,10 +53,7 @@ public Transform target;
     fireballInst.velocity = worldPosition;
   // fireballInst.MovePosition(worldPosition);
 
-        } else if (fButton) {
-            Debug.Log("Shooting with f ");
         }
     }
-
     
 }
